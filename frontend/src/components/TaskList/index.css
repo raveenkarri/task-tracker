@@ -1,0 +1,112 @@
+
+.tasklist-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.tasklist-title {
+  text-align: center;
+  color: #007bff;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.tasklist-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tasklist-select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.tasklist-sort-btn,
+.tasklist-add-btn,
+.tasklist-insight-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+}
+
+.tasklist-sort-btn:hover,
+.tasklist-add-btn:hover,
+.tasklist-insight-btn:hover {
+  background-color: #0056b3;
+}
+
+.tasklist-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 15px;
+}
+
+.tasklist-card {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 5px solid #007bff;
+  transition: transform 0.2s ease;
+}
+
+.tasklist-card:hover {
+  transform: translateY(-3px);
+}
+
+.tasklist-card h3 {
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.tasklist-empty {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+.tasklist-insight-btn {
+  display: block;
+  margin: 30px auto 0;
+  background-color: #28a745;
+}
+
+.tasklist-insight-btn:hover {
+  background-color: #218838;
+}
+
+
+@media (max-width: 600px) {
+  .tasklist-container {
+    margin: 30px 10px;
+    padding: 15px;
+  }
+
+  .tasklist-title {
+    font-size: 1.5rem;
+  }
+
+  .tasklist-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tasklist-select,
+  .tasklist-sort-btn,
+  .tasklist-add-btn {
+    width: 100%;
+  }
+}

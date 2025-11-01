@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
+import './index.css'
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -39,39 +40,39 @@ const Login = () => {
   };
 
   return (
-    <div
-      style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}
-    >
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            style={{ width: "100%", margin: "8px 0", padding: "10px" }}
-          />
-        </div>
-        <div>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{ width: "100%", margin: "8px 0", padding: "10px" }}
-          />
-        </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <button
-          type="submit"
-          style={{ padding: "10px 20px", marginTop: "10px" }}
-        >
+    <div className="login-container">
+      <h2 className="login-title">Login</h2>
+      <form className="login-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+          className="login-input"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          className="login-input"
+        />
+
+        {error && <p className="login-error">{error}</p>}
+
+        <button type="submit" className="login-btn">
           Login
         </button>
-        <button onClick={()=> navigate("/register")}>If not Registerd Click here</button>
+
+        <button
+          type="button"
+          className="login-register-btn"
+          onClick={() => navigate("/register")}
+        >
+          Not Registered? Click Here
+        </button>
       </form>
     </div>
   );

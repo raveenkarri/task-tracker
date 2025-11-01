@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import "./index.css";
 
 const TaskList = () => {
   const navigate = useNavigate();
@@ -44,18 +45,27 @@ const TaskList = () => {
   };
 
   const toggleOrder = () => {
-    setFilters({ ...filters, order: filters.order === "ASC" ? "DESC" : "ASC" });
+    setFilters({
+      ...filters,
+      order:
+        filters.order === "ASC"
+          ? "DESC"
+          : filters.order === "DESC"
+          ? ""
+          : "ASC",
+    });
   };
 
   return (
-    <div className="task-container">
-      <h2>Task List</h2>
+    <div className="tasklist-container">
+      <h2 className="tasklist-title">My Tasks</h2>
 
-      <div className="filters">
+      <div className="tasklist-filters">
         <select
           name="priority"
           value={filters.priority}
           onChange={handleFilterChange}
+          className="tasklist-select"
         >
           <option value="">All Priorities</option>
           <option value="Low">Low</option>
@@ -67,6 +77,7 @@ const TaskList = () => {
           name="status"
           value={filters.status}
           onChange={handleFilterChange}
+          className="tasklist-select"
         >
           <option value="">All Status</option>
           <option value="Open">Open</option>
@@ -74,7 +85,7 @@ const TaskList = () => {
           <option value="Done">Done</option>
         </select>
 
-        <button onClick={toggleOrder}>
+        <button className="tasklist-sort-btn" onClick={toggleOrder}>
           {filters.order === ""
             ? "No Sorting"
             : filters.order === "ASC"
@@ -82,15 +93,20 @@ const TaskList = () => {
             : "↓ Due Date Desc"}
         </button>
 
-        <button onClick={() => navigate("/taskForm")}>+ Add Task</button>
+        <button
+          className="tasklist-add-btn"
+          onClick={() => navigate("/taskForm")}
+        >
+          + Add Task
+        </button>
       </div>
 
-      <div className="task-list">
+      <div className="tasklist-list">
         {tasks.length === 0 ? (
-          <p>No tasks found.</p>
+          <p className="tasklist-empty">No tasks found.</p>
         ) : (
           tasks.map((task) => (
-            <div className="task-card" key={task.id}>
+            <div className="tasklist-card" key={task.id}>
               <h3>{task.title}</h3>
               <p>{task.description}</p>
               <p>
@@ -100,13 +116,20 @@ const TaskList = () => {
                 <strong>Status:</strong> {task.status}
               </p>
               <p>
-                <strong>Due Date:</strong>
+                <strong>Due Date:</strong>{" "}
                 {new Date(task.due_date).toLocaleDateString()}
               </p>
             </div>
           ))
         )}
       </div>
+
+      <button
+        className="tasklist-insight-btn"
+        onClick={() => navigate("/insights")}
+      >
+        Insights Panel
+      </button>
     </div>
   );
 };

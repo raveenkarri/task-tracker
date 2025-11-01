@@ -2,9 +2,16 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
+import './index.css'
+
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!Cookies.get("jwtToken"));
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = Cookies.get("jwtToken");
+    setIsLoggedIn(!!token);
+  }, []);
 
   const handleLogin = () => {
     if (isLoggedIn) {
@@ -17,12 +24,30 @@ const Header = () => {
   };
 
   return (
-    <div>
-      <h1>Logo</h1>
-      <button onClick={handleLogin}>
-        {isLoggedIn ? "Logout" : "Login"}
-      </button>
-    </div>
+    <header className="header-bar">
+      <div className="header-logo" onClick={() => navigate("/")}>
+        <h1>Task Manager</h1>
+      </div>
+
+      <nav className="header-nav">
+        {isLoggedIn && (
+          <>
+            <button className="header-nav-btn" onClick={() => navigate("/")}>
+              Home
+            </button>
+            <button
+              className="header-nav-btn"
+              onClick={() => navigate("/taskForm")}
+            >
+              Add Task
+            </button>
+          </>
+        )}
+        <button className="header-login-btn" onClick={handleLogin}>
+          {isLoggedIn ? "Logout" : "Login"}
+        </button>
+      </nav>
+    </header>
   );
 };
 

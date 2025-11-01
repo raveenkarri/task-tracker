@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
+import "./index.css";
 
 const Register = () => {
   const [fullname, setFullname] = useState("");
@@ -23,7 +24,7 @@ const Register = () => {
     setSuccess("");
 
     try {
-     const res = await axios.post("http://localhost:8080/user/register", {
+      const res = await axios.post("http://localhost:8080/user/register", {
         fullname,
         username,
         password,
@@ -39,50 +40,47 @@ const Register = () => {
   };
 
   return (
-    <div
-      style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}
-    >
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={fullname}
-            onChange={(e) => setFullname(e.target.value)}
-            required
-            style={{ width: "100%", margin: "8px 0", padding: "10px" }}
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            style={{ width: "100%", margin: "8px 0", padding: "10px" }}
-          />
-        </div>
-        <div>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{ width: "100%", margin: "8px 0", padding: "10px" }}
-          />
-        </div>
+    <div className="register-container">
+      <h2 className="register-title">Register</h2>
+      <form className="register-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Full Name"
+          value={fullname}
+          onChange={(e) => setFullname(e.target.value)}
+          required
+          className="register-input"
+        />
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+          className="register-input"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          className="register-input"
+        />
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        {success && <p style={{ color: "green" }}>{success}</p>}
+        {error && <p className="register-error">{error}</p>}
+        {success && <p className="register-success">{success}</p>}
+
+        <button type="submit" className="register-btn">
+          Register
+        </button>
 
         <button
-          type="submit"
-          style={{ padding: "10px 20px", marginTop: "10px" }}
+          type="button"
+          className="register-login-btn"
+          onClick={() => navigate("/login")}
         >
-          Register
+          Already have an account? Login
         </button>
       </form>
     </div>

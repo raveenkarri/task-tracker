@@ -1,0 +1,123 @@
+
+.taskform-container {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 25px 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.taskform-title {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.taskform-back-btn {
+  background-color: #6c757d;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+}
+
+.taskform-back-btn:hover {
+  background-color: #5a6268;
+}
+
+.taskform-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.taskform-group {
+  margin-bottom: 15px;
+}
+
+.taskform-input,
+.taskform-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.taskform-input:focus,
+.taskform-textarea:focus {
+  border-color: #007bff;
+}
+
+.taskform-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.taskform-radio-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
+
+.taskform-radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.taskform-submit-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.taskform-submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.taskform-error {
+  color: red;
+  font-size: 0.95rem;
+  margin-top: 5px;
+}
+
+.taskform-success {
+  color: green;
+  font-size: 0.95rem;
+  margin-top: 5px;
+}
+
+
+@media (max-width: 480px) {
+  .taskform-container {
+    margin: 40px 15px;
+    padding: 20px;
+  }
+
+  .taskform-title {
+    font-size: 1.5rem;
+  }
+
+  .taskform-submit-btn,
+  .taskform-back-btn {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}

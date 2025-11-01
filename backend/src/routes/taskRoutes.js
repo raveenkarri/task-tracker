@@ -6,7 +6,7 @@ import authenticationRoute from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 //POST /tasks
-router.post("/",authenticationRoute, async (req,res)=>{
+router.post("/tasks",authenticationRoute, async (req,res)=>{
     try{
         const {title,description,priority,due_date,status} = req.body
         if(!title  || !priority || !due_date){
@@ -25,7 +25,7 @@ router.post("/",authenticationRoute, async (req,res)=>{
 })
 
 //GET /tasks
-router.get("/",authenticationRoute, async (req,res)=>{
+router.get("/tasks",authenticationRoute, async (req,res)=>{
     try{
         const {priority,status,order} = req.query
         
@@ -58,7 +58,7 @@ router.get("/",authenticationRoute, async (req,res)=>{
 })
 
 //PATCH /tasks/:id
-router.patch("/:id",authenticationRoute, async (req,res)=>{
+router.patch("/tasks/:id",authenticationRoute, async (req,res)=>{
     try{
       const {id} = req.params
       const {status,priority} = req.body
@@ -79,5 +79,56 @@ router.patch("/:id",authenticationRoute, async (req,res)=>{
         res.status(400).json({Error: err.message})
     }
 })
+
+//insights
+
+router.get("/insights", authenticationRoute, async (req, res) => {
+  try {
+    const totalOpen = await db.get(
+      "SELECT COUNT(*) as count FROM tasks WHERE status = 'Open'"
+    );
+
+    const priorityCounts = await db.all(`
+      SELECT priority, COUNT(*) as count
+      FROM tasks
+      GROUP BY priority
+    `);
+
+    const dueSoon = await db.get(`
+      SELECT COUNT(*) as count
+      FROM tasks
+      WHERE status = 'Open'
+      AND DATE(due_date) <= DATE('now', '+3 days')
+    `);
+
+    
+    let dominantPriority = "Medium";
+    let maxCount = 0;
+    priorityCounts.forEach((p) => {
+      if (p.count > maxCount) {
+        maxCount = p.count;
+        dominantPriority = p.priority;
+      }
+    });
+
+    
+    let insight = `You have ${totalOpen.count} open tasks.`;
+    if (dueSoon.count > 0)
+      insight += ` ${dueSoon.count} ${dueSoon.count === 1 ? "task is" : "tasks are"} due within 3 days.`;
+    insight += ` Most of your workload is ${dominantPriority} priority.`;
+
+    res.status(200).json({
+      insights: {
+        totalOpen: totalOpen.count,
+        priorityCounts,
+        dueSoon: dueSoon.count,
+        summary: insight,
+      },
+    });
+  } catch (err) {
+    console.error("Error generating insights:", err.message);
+    res.status(500).json({ error: "Failed to generate insights" });
+  }
+});
 
 export default router

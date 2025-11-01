@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import TaskList from "./components/TaskList";
 import TaskForm from "./components/TaskForm";
+import InsightsPanel from "./components/InsightsPanel";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import "./App.css";
@@ -20,6 +21,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<TaskList />} />
           <Route path="/taskForm" element={<TaskForm />} />
+          <Route path="/insights" element={<InsightsPanel/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

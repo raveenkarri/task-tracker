@@ -22,7 +22,7 @@ const serverStart = async () => {
     await initializeUsersDb();
     
     app.use("/user",userRoutes)
-    app.use("/tasks",taskRoutes)
+    app.use("/",taskRoutes)
 
     app.listen(8080, () => {
       console.log("Server running");
