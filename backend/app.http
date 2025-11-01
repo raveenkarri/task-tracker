@@ -1,0 +1,51 @@
+POST http://localhost:8080/user/register
+Content-Type: application/json
+
+{
+  "fullname": "raveen",
+  "username": "raveenkaarri",
+  "password": "rav123"
+}
+
+###
+POST http://localhost:8080/user/login
+Content-Type: application/json
+
+{
+  "username": "raveenkaarri",
+  "password": "rav123"
+}
+
+
+###
+GET http://localhost:8080/user/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJmdWxsbmFtZSI6InJhdmVlbiIsInVzZXJuYW1lIjoicmF2ZWVua2FhcnJpIiwicGFzc3dvcmQiOiIkMmIkMTAkWWVGTUpwMi40TDFHb0hvb2xIcmNBLnVjRk5ES2Z5cE9rdDJoaHVnYS40bkluaEk0MlRsMm0ifSwiaWF0IjoxNzYxOTQwMTc5LCJleHAiOjE3NjQ1MzIxNzl9.CRyjfV-Y_ibzscZqCSMQG3L2ACrWuDvfnfXErWEzcik
+
+###
+### Create a new task
+POST http://localhost:8080/tasks
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJmdWxsbmFtZSI6InJhdmVlbiIsInVzZXJuYW1lIjoicmF2ZWVua2FhcnJpIiwicGFzc3dvcmQiOiIkMmIkMTAkWWVGTUpwMi40TDFHb0hvb2xIcmNBLnVjRk5ES2Z5cE9rdDJoaHVnYS40bkluaEk0MlRsMm0ifSwiaWF0IjoxNzYxOTQwMTc5LCJleHAiOjE3NjQ1MzIxNzl9.CRyjfV-Y_ibzscZqCSMQG3L2ACrWuDvfnfXErWEzcik
+
+
+{
+  "title": "Finish React Project",
+  "description": "Complete the task tracker frontend and connect to backend API",
+  "priority": "High",
+  "due_date": "2025-11-05",
+  "status": "Open"
+}
+
+###
+GET http://localhost:8080/tasks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJmdWxsbmFtZSI6InJhdmVlbiIsInVzZXJuYW1lIjoicmF2ZWVua2FhcnJpIiwicGFzc3dvcmQiOiIkMmIkMTAkWWVGTUpwMi40TDFHb0hvb2xIcmNBLnVjRk5ES2Z5cE9rdDJoaHVnYS40bkluaEk0MlRsMm0ifSwiaWF0IjoxNzYxOTQwMTc5LCJleHAiOjE3NjQ1MzIxNzl9.CRyjfV-Y_ibzscZqCSMQG3L2ACrWuDvfnfXErWEzcik
+
+###
+PATCH http://localhost:8080/tasks/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJmdWxsbmFtZSI6InJhdmVlbiIsInVzZXJuYW1lIjoicmF2ZWVua2FhcnJpIiwicGFzc3dvcmQiOiIkMmIkMTAkWWVGTUpwMi40TDFHb0hvb2xIcmNBLnVjRk5ES2Z5cE9rdDJoaHVnYS40bkluaEk0MlRsMm0ifSwiaWF0IjoxNzYxOTQwMTc5LCJleHAiOjE3NjQ1MzIxNzl9.CRyjfV-Y_ibzscZqCSMQG3L2ACrWuDvfnfXErWEzcik
+
+{
+  "priority": "Low",
+  "status": "Done"
+}
