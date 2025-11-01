@@ -17,7 +17,8 @@ const authenticationRoute = async (req,res,next)=>{
             if(err){
                 return res.json({error:err.message,message:"Error in token verification"})
             }
-            req.user = payload 
+            req.user = payload.user 
+            console.log(req.user)
             next()
             
         })

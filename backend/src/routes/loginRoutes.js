@@ -6,7 +6,7 @@ import authenticationRoute from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-import { userDB } from "../db/userDb.js";
+import { db } from "../db/tasksDb.js";
 
 router.post("/register", async (req, res) => {
   try {
@@ -15,7 +15,7 @@ router.post("/register", async (req, res) => {
     if (!fullname || !username || !password) {
       return res.status(400).json({ message: "All fields are Mandatory" });
     }
-    const user = await userDB.get("select * from users where username = ?", [
+    const user = await db.get("select * from users where username = ?", [
       username,
     ]);
     if (user) {
@@ -25,7 +25,7 @@ router.post("/register", async (req, res) => {
 
     const sql = "insert into users(fullname,username,password) values(?,?,?)";
 
-    const dataResponse = await userDB.run(sql, [
+    const dataResponse = await db.run(sql, [
       fullname,
       username,
       hashPassword,
@@ -42,7 +42,7 @@ router.post("/register", async (req, res) => {
 
 //get users
 router.get("/users",authenticationRoute, async (req, res) => {
-  const users = await userDB.all("select * from users");
+  const users = await db.all("select * from users");
   res.json({ users: users,payload:req.user });
 });
 
@@ -54,7 +54,7 @@ router.post("/login", async (req, res) => {
     if (!username || !password) {
       return res.status(400).json({ message: "All fields are Mandatory" });
     }
-    const user = await userDB.get("select * from users where username = ?", [
+    const user = await db.get("select * from users where username = ?", [
       username,
     ]);
     if (!user) {

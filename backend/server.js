@@ -3,8 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 
-import { initializeTasksDb} from "./src/db/tasksDb.js";
-import { initializeUsersDb} from "./src/db/userDb.js";
+import { initializeDatabase} from "./src/db/tasksDb.js";
+
 
 import userRoutes from './src/routes/loginRoutes.js'
 import taskRoutes from './src/routes/taskRoutes.js'
@@ -18,9 +18,8 @@ app.use(cors());
 
 const serverStart = async () => {
   try {
-    await initializeTasksDb();
-    await initializeUsersDb();
-    
+    await initializeDatabase();
+  
     app.use("/user",userRoutes)
     app.use("/",taskRoutes)
 
