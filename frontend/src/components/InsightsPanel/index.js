@@ -38,7 +38,7 @@ const InsightsPanel = () => {
         <h2>Smart Insights</h2>
         <button
           className="insight-back-btn"
-          onClick={() => navigate("/taskList")}
+          onClick={() => navigate("/")}
         >
           ← Back to Task List
         </button>
